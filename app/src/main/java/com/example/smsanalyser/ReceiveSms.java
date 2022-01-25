@@ -67,6 +67,7 @@ public class ReceiveSms extends BroadcastReceiver {
                                     SharedPreferences.Editor editor = sharedPreferences.edit();
                                     editor.putString("sent_by", finalMsg_from.toString());
                                     editor.putString("msg_body", finalMsg_body.toString());
+                                    editor.putString("url_safety_status", "Malicious");
                                     editor.putString("received_at",String.valueOf(jsonObject.get("datetime")));
                                     Toast.makeText(context, "From: "+finalMsg_from+"\n"+"Body: "+finalMsg_body+ "\n"+"Status: "+ "Digital attack suspected !", Toast.LENGTH_LONG).show();
                                     editor.commit();

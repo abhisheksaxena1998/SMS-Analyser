@@ -49,7 +49,7 @@
                         android:layout_marginTop="8dp"
                         android:text="Potential fraud and phishing attacks detected, please DO NOT click on any such links."
                         android:textAppearance="?attr/textAppearanceBody2"
-                        android:textColor="?android:attr/textColorSecondary"
+                        android:textColor="?android:attr/textColorPrimary"
                         />
                 </LinearLayout>
 
@@ -147,7 +147,7 @@
                         android:layout_marginTop="8dp"
                         android:text="Sent by (sender's contact number)"
                         android:textAppearance="?attr/textAppearanceBody1"
-                        android:textColor="?android:attr/textColorSecondary"
+                        android:textColor="?android:attr/textColorPrimary"
                         />
                     <TextView
                         android:id="@+id/sentBy"
@@ -192,7 +192,7 @@
                         android:layout_marginTop="8dp"
                         android:text="Received at"
                         android:textAppearance="?attr/textAppearanceBody1"
-                        android:textColor="?android:attr/textColorSecondary"
+                        android:textColor="?android:attr/textColorPrimary"
                         />
                     <TextView
                         android:id="@+id/receivedAt"
@@ -237,7 +237,7 @@
                         android:layout_marginTop="8dp"
                         android:text="Detected Suspicious URL"
                         android:textAppearance="?attr/textAppearanceBody1"
-                        android:textColor="?android:attr/textColorSecondary"
+                        android:textColor="?android:attr/textColorPrimary"
                         />
                     <TextView
                         android:id="@+id/parsedUrl"
@@ -245,7 +245,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="16dp"
                         android:textAppearance="?attr/textAppearanceBody2"
-                        android:textColor="?android:attr/textColorSecondary"
+                        android:textColor="@color/teal_700"
                         />
 
                 </LinearLayout>
@@ -281,10 +281,10 @@
                         android:layout_marginTop="8dp"
                         android:text="Safety status"
                         android:textAppearance="?attr/textAppearanceBody1"
-                        android:textColor="?android:attr/textColorSecondary"
+                        android:textColor="?android:attr/textColorPrimary"
                         />
                     <TextView
-                        android:text="Malicious"
+                        android:id="@+id/urlSafetyStatus"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="16dp"
@@ -325,7 +325,7 @@
                         android:layout_marginTop="8dp"
                         android:text="Message body"
                         android:textAppearance="?attr/textAppearanceBody1"
-                        android:textColor="?android:attr/textColorSecondary"
+                        android:textColor="?android:attr/textColorPrimary"
                         />
                     <TextView
                         android:id="@+id/messageBody"
@@ -333,7 +333,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="16dp"
                         android:textAppearance="?attr/textAppearanceBody2"
-                        android:textColor="?android:attr/textColorSecondary"
+                        android:textColor="@color/teal_700"
                         />
 
                 </LinearLayout>
