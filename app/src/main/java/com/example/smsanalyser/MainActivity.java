@@ -8,8 +8,10 @@ import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import android.Manifest;
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
@@ -37,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
     public static final String MyPREFERENCES = "myPrefs" ;
     SharedPreferences sharedpreferences;
     private TextView sentBy, messageBody, parsedUrl, receivedAt;
-    private Button syncData;
+    private Button syncData, redirectToSandbox, redirectToDetails;
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
@@ -57,6 +59,8 @@ public class MainActivity extends AppCompatActivity {
         receivedAt.setText(sharedPreferences.getString("received_at",""));
         syncData = findViewById(R.id.syncData);
         layout = findViewById(R.id.layout);
+        redirectToSandbox = findViewById(R.id.redirectToSandbox);
+        redirectToDetails = findViewById(R.id.redirectToDetails);
         Alerter.create(MainActivity.this).setTitle("Alert !")
                 .setText("You have been subjected to digital attacks")
                 .setDuration(3000)
@@ -109,6 +113,48 @@ public class MainActivity extends AppCompatActivity {
                 receivedAt.setText(sharedPreferences.getString("received_at",""));
                 Toast.makeText(getApplicationContext(),"latest SMS details updated", Toast.LENGTH_LONG);
                 snackbar.show();
+            }
+        });
+
+        redirectToDetails.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String resultUrl = "https://mudvfinalradar.eu-gb.cf.appdomain.cloud/result?url=%s";
+                List<String> parsedTargetUrl = extractUrls(sharedPreferences.getString("msg_body", ""));
+                if (!parsedTargetUrl.isEmpty()){
+                    if (parsedTargetUrl.get(0) != "") {
+                        resultUrl = String.format(resultUrl, parsedTargetUrl.get(0));
+                        Intent viewIntent =
+                                new Intent("android.intent.action.VIEW",
+                                        Uri.parse(resultUrl));
+                        startActivity(viewIntent);
+                    } else {
+                        Toast.makeText(getApplicationContext(), "Please click on refresh button to view details of most recent threat", Toast.LENGTH_LONG);
+                    }
+                }else {
+                    Toast.makeText(getApplicationContext(), "Please click on refresh button to view details of most recent threat", Toast.LENGTH_LONG);
+                }
+            }
+        });
+
+        redirectToSandbox.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String resultUrl = "https://mudvfinalradar.eu-gb.cf.appdomain.cloud/sandboxresult?url=%s";
+                List<String> parsedTargetUrl = extractUrls(sharedPreferences.getString("msg_body", ""));
+                if (!parsedTargetUrl.isEmpty()){
+                    if (parsedTargetUrl.get(0) != "") {
+                        resultUrl = String.format(resultUrl, parsedTargetUrl.get(0));
+                        Intent viewIntent =
+                                new Intent("android.intent.action.VIEW",
+                                        Uri.parse(resultUrl));
+                        startActivity(viewIntent);
+                    } else {
+                        Toast.makeText(getApplicationContext(), "Please click on refresh button to view details of most recent threat", Toast.LENGTH_LONG);
+                    }
+                }else {
+                    Toast.makeText(getApplicationContext(), "Please click on refresh button to view details of most recent threat", Toast.LENGTH_LONG);
+                }
             }
         });
         if (Build.VERSION.SDK_INT>=Build.VERSION_CODES.M && checkSelfPermission(Manifest.permission.RECEIVE_SMS)!= PackageManager.PERMISSION_GRANTED){
