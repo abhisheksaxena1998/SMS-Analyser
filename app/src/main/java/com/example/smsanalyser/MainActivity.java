@@ -38,7 +38,7 @@ public class MainActivity extends AppCompatActivity {
     CoordinatorLayout layout;
     public static final String MyPREFERENCES = "myPrefs" ;
     SharedPreferences sharedpreferences;
-    private TextView sentBy, messageBody, parsedUrl, receivedAt;
+    private TextView sentBy, messageBody, parsedUrl, receivedAt, urlSafetyStatus;
     private Button syncData, redirectToSandbox, redirectToDetails;
 
     @RequiresApi(api = Build.VERSION_CODES.O)
@@ -53,17 +53,19 @@ public class MainActivity extends AppCompatActivity {
         messageBody = findViewById(R.id.messageBody);
         parsedUrl = findViewById(R.id.parsedUrl);
         receivedAt = findViewById(R.id.receivedAt);
+        urlSafetyStatus = findViewById(R.id.urlSafetyStatus);
         sentBy.setText(sharedPreferences.getString("sent_by", ""));
         messageBody.setText(sharedPreferences.getString("msg_body", ""));
         parsedUrl.setText(String.join(", ",extractUrls(sharedPreferences.getString("msg_body", ""))));
         receivedAt.setText(sharedPreferences.getString("received_at",""));
+        urlSafetyStatus.setText(sharedPreferences.getString("url_safety_status",""));
         syncData = findViewById(R.id.syncData);
         layout = findViewById(R.id.layout);
         redirectToSandbox = findViewById(R.id.redirectToSandbox);
         redirectToDetails = findViewById(R.id.redirectToDetails);
         Alerter.create(MainActivity.this).setTitle("Alert !")
                 .setText("You have been subjected to digital attacks")
-                .setDuration(3000)
+                .setDuration(5000)
                 .setBackgroundColorRes(R.color.warning)
                 .show();
         Snackbar snackbar
@@ -111,6 +113,7 @@ public class MainActivity extends AppCompatActivity {
                 messageBody.setText(sharedPreferences.getString("msg_body", ""));
                 parsedUrl.setText(String.join(", ",extractUrls(sharedPreferences.getString("msg_body", ""))));
                 receivedAt.setText(sharedPreferences.getString("received_at",""));
+                urlSafetyStatus.setText(sharedPreferences.getString("url_safety_status",""));
                 Toast.makeText(getApplicationContext(),"latest SMS details updated", Toast.LENGTH_LONG);
                 snackbar.show();
             }
